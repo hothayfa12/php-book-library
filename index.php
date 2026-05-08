@@ -2,9 +2,7 @@
 session_start();
 //120230430
 /*
-|--------------------------------------------------------------------------
-| Helper Functions
-|--------------------------------------------------------------------------
+Helper Functions
 */
 
 function e($value)
@@ -62,9 +60,7 @@ function sortUrl($column, $currentSort, $currentDirection, $searchTerm)
 }
 
 /*
-|--------------------------------------------------------------------------
-| Genres Array
-|--------------------------------------------------------------------------
+ Genres Array
 */
 
 $genres = [
@@ -77,9 +73,7 @@ $genres = [
 ];
 
 /*
-|--------------------------------------------------------------------------
-| Default Books Array
-|--------------------------------------------------------------------------
+ Default Books Array
 */
 
 $defaultBooks = [
@@ -112,13 +106,6 @@ $defaultBooks = [
     ]
 ];
 
-/*
-|--------------------------------------------------------------------------
-| Store Books in Session
-|--------------------------------------------------------------------------
-| Since this assignment does not use a database, session is used to keep
-| added, updated, and deleted books during the current browser session.
-*/
 
 if (!isset($_SESSION["books"])) {
     $_SESSION["books"] = $defaultBooks;
@@ -127,9 +114,7 @@ if (!isset($_SESSION["books"])) {
 $books = &$_SESSION["books"];
 
 /*
-|--------------------------------------------------------------------------
-| Initial Variables
-|--------------------------------------------------------------------------
+Initial Variables
 */
 
 $errors = [];
@@ -147,9 +132,7 @@ $isEditMode = false;
 $editId = null;
 
 /*
-|--------------------------------------------------------------------------
-| Handle Delete Request
-|--------------------------------------------------------------------------
+ Handle Delete Request
 */
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["delete_id"])) {
@@ -168,9 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["delete_id"])) {
 }
 
 /*
-|--------------------------------------------------------------------------
-| Handle Add / Update Request
-|--------------------------------------------------------------------------
+ Handle Add / Update Request
 */
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["delete_id"])) {
@@ -195,9 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["delete_id"])) {
     ];
 
     /*
-    |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
+     Validation Rules
     */
 
     if ($title === "") {
@@ -247,9 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["delete_id"])) {
     }
 
     /*
-    |--------------------------------------------------------------------------
-    | Add or Update Book if Validation Passes
-    |--------------------------------------------------------------------------
+     Add or Update Book if Validation Passes
     */
 
     if (empty($errors)) {
@@ -307,9 +284,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["delete_id"])) {
 }
 
 /*
-|--------------------------------------------------------------------------
-| Detect Edit Mode by Query String
-|--------------------------------------------------------------------------
+ Detect Edit Mode by Query String
 */
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST" && isset($_GET["edit_id"])) {
@@ -331,9 +306,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST" && isset($_GET["edit_id"])) {
 }
 
 /*
-|--------------------------------------------------------------------------
-| Success Message
-|--------------------------------------------------------------------------
+ Success Message
 */
 
 $successMessage = $_SESSION["success"] ?? "";
@@ -343,9 +316,7 @@ if (isset($_SESSION["success"])) {
 }
 
 /*
-|--------------------------------------------------------------------------
-| Search and Sort
-|--------------------------------------------------------------------------
+ Search and Sort
 */
 
 $searchTerm = cleanInput($_GET["search"] ?? "");
